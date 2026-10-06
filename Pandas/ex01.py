@@ -45,3 +45,26 @@ print(df9)
 # sorting by column in descending order
 df10 = df[(df['deptno']==10) & (df['salary']>=2000)].sort_values(by='salary', ascending=False)
 print(df10)
+
+# sorting by column in ascending and descending order
+df11 = df.sort_values(by=['deptno','salary'], ascending=[True, False])
+print(df11)
+
+# change data type of columns
+df12 = df.astype({'salary':'float', 'doj':'datetime64[ns]'}).head()
+print(df12)
+print(df12.dtypes)
+
+# display date column as dd-mm-yyyy format
+df13 = df.astype({'salary':'float', 'doj':'datetime64[ns]'}).head()
+df13['doj'] = df13['doj'].dt.strftime('%d-%m-%Y')
+print(df13)
+print(df13.dtypes)
+
+# select data between specific dates
+df = df.astype({'doj':'datetime64[ns]'})
+df14 = df.sort_values(by='doj', ascending=True)
+df14 = df14[(df14['doj'] >= '2015-01-01') & (df14['doj'] <= '2016-12-31')]
+df14 = df14.sort_values(by='deptno', ascending=True)
+print(df14)
+
